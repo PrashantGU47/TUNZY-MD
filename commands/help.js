@@ -77,7 +77,7 @@ async function helpCommand(sock, chatId, message) {
 │  ✪ .autostatus react
 │  ✪ .pmblocker
 │  ✪ .pmblocker setmsg
-│  ✪ .save
+│  ✪ .savestatus 
 ╰━━━━━━━━━━━━━━━━━┈⊷
 
 ╭━━〔 🖼️ MEDIA & STICKERS 〕━━┈⊷
