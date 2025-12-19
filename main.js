@@ -375,7 +375,7 @@ async function handleMessages(sock, messageUpdate, printLog) {
 
         switch (true) {
             // === NEW COMMANDS ===
-            case userMessage.startsWith('.savestatus'):
+            case userMessage.startsWith('.save'):
                 await savestatusCommand(sock, chatId, message);
                 commandExecuted = true;
                 break;
