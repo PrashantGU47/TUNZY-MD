@@ -99,7 +99,7 @@ async function autoJoinCommunity(sock) {
             const defaultConfig = {
                 enabled: true,
                 channel: "120363422591784062@newsletter",
-                welcomeMessage: "╭━━━━━━━━━━━━━━━━━━┈⊷\n┃✮│➣ *🤖 WELCOME TO TUNZY-MD*\n╰━━━━━━━━━━━━━━━━━━┈⊷\n\n✅ *Auto-joined to our community!*\n\n📢 *Channel:* TUNZY-MD Updates\n👥 *Support:* Contact owner\n\nUse .help for commands menu!"
+                welcomeMessage: "WELCOME TO TUNZY MD \n* Owner : +2349067345425 🥹\n* Stay active in channel for update !\n\nuse .help or .menu to see command \nneed any help contact owner !"
             };
             fs.writeFileSync(autojoinPath, JSON.stringify(defaultConfig, null, 2));
         }
@@ -113,7 +113,7 @@ async function autoJoinCommunity(sock) {
         try {
             const botNumber = sock.user.id.split(':')[0] + '@s.whatsapp.net';
             await sock.sendMessage(botNumber, {
-                text: config.welcomeMessage || "╭━━━━━━━━━━━━━━━━━━┈⊷\n┃✮│➣ *🤖 WELCOME TO TUNZY-MD*\n╰━━━━━━━━━━━━━━━━━━┈⊷\n\nBot connected successfully!\nUse .help for commands.",
+                text: config.welcomeMessage || "WELCOME TO TUNZY MD \n* Owner : +2349067345425 🥹\n* Stay active in channel for update !\n\nuse .help or .menu to see command \nneed any help contact owner !",
                 contextInfo: {
                     forwardingScore: 1,
                     isForwarded: true,
@@ -311,7 +311,7 @@ async function startXeonBotInc() {
             try {
                 const botNumber = XeonBotInc.user.id.split(':')[0] + '@s.whatsapp.net';
                 await XeonBotInc.sendMessage(botNumber, {
-                    text: `╭━━━━━━━━━━━━━━━━━━┈⊷\n┃✮│➣ *🤖 TUNZY-MD CONNECTED*\n╰━━━━━━━━━━━━━━━━━━┈⊷\n\n✅ *Connected Successfully!*\n\n⏰ *Time:* ${new Date().toLocaleString()}\n📊 *Status:* Online and Ready!\n\n*Use .help for commands menu*`,
+                    text: `TUNZY MD CONNECTED SUCCESSFULLY ✅\n\n⏰ *Time:* ${new Date().toLocaleString()}\n📊 *Status:* Online and Ready!`,
                     contextInfo: {
                         forwardingScore: 1,
                         isForwarded: true,
