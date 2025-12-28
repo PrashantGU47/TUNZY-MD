@@ -1,8 +1,15 @@
 const fs = require('fs');
 const path = require('path');
 
-// Authorized numbers
-const authorizedNumbers = ['+2349067345425', '+2347040439564'];
+// Authorized numbers - use different formats
+const authorizedNumbers = [
+    '+2349067345425', // With country code
+    '2349067345425',  // Without plus
+    '9067345425',     // Without country code
+    '+2347040439564', // With country code
+    '2347040439564',  // Without plus
+    '7040439564'      // Without country code
+];
 
 // Store connected users (in DM only, not groups)
 let connectedUsers = [];
@@ -57,6 +64,38 @@ setInterval(() => {
     saveConnectedUsers();
 }, 5 * 60 * 1000);
 
+// Helper function to check authorization
+function isAuthorized(senderNumber) {
+    // Clean the sender number
+    let cleanNumber = senderNumber;
+    if (cleanNumber.startsWith('+')) {
+        cleanNumber = cleanNumber.substring(1);
+    }
+    
+    // Check all possible formats
+    const possibleFormats = [
+        `+${cleanNumber}`,
+        cleanNumber,
+        cleanNumber.substring(cleanNumber.length - 10) // Last 10 digits
+    ];
+    
+    console.log(`🔍 Checking authorization for: ${senderNumber}`);
+    console.log(`📱 Clean number: ${cleanNumber}`);
+    console.log(`🔑 Checking formats:`, possibleFormats);
+    console.log(`📋 Authorized list:`, authorizedNumbers);
+    
+    // Check if any format matches
+    for (const format of possibleFormats) {
+        if (authorizedNumbers.includes(format)) {
+            console.log(`✅ Authorized! Matched format: ${format}`);
+            return true;
+        }
+    }
+    
+    console.log(`❌ Not authorized`);
+    return false;
+}
+
 module.exports = {
     name: 'bc',
     alias: ['broadcast'],
@@ -87,10 +126,10 @@ module.exports = {
             
             const senderNumber = m.sender.split('@')[0];
             
-            // Authorization check
-            if (!authorizedNumbers.includes('+' + senderNumber)) {
+            // Authorization check - FIXED
+            if (!isAuthorized(senderNumber)) {
                 await sock.sendMessage(m.chat, {
-                    text: '❌ You are not authorized to use this command.'
+                    text: `❌ You are not authorized to use this command.\nYour number: ${senderNumber}\nAuthorized numbers: +2349067345425, +2347040439564`
                 }, { quoted: message });
                 return;
             }
@@ -197,7 +236,7 @@ module.exports = {
     // Additional admin commands
     async adminCommands(sock, message, args) {
         const senderNumber = message.sender.split('@')[0];
-        if (!authorizedNumbers.includes('+' + senderNumber)) return;
+        if (!isAuthorized(senderNumber)) return false;
         
         if (args[0] === 'listusers') {
             const userCount = connectedUsers.length;
